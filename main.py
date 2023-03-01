@@ -1,25 +1,34 @@
-print("Choose an operation")
-print("1. Add")
-print("2. Subtract")
-print("3. Multiply")
-print("4. Divide")
+def calculator():
+     try:
+         num1 = float(input("Введіть перше число: "))
+         num2 = float(input("Введіть друге число: "))
+     except ValueError:
+         print("Введені значення некоректні.")
+         return
 
-choice = input("Enter the operation number (1/2/3/4): ")
+     operation = input("Виберіть операцію (+, -, *, /): ")
 
-num1 = float(input("Enter first number: "))
-num2 = float(input("Enter second number: "))
+     try:
+         if operation == "+":
+             result = num1 + num2
+         elif operation == "-":
+             result = num1 - num2
+         elif operation == "*":
+             result = num1 * num2
+         elif operation == "/":
+             if num2 == 0:
+                 raise ZeroDivisionError("Ділення на нуль!")
+             result = num1 / num2
+         else:
+             raise ValueError("Некоректна операція!")
+     except (ValueError, ZeroDivisionError) as e:
+         print(f"Помилка: {e}")
+         return
 
-if choice == '1':
-    print(num1, "+", num2, "=", (num1+num2))
+     print(f"Результат: {result}")
 
-elif choice == '2':
-    print(num1, "-", num2, "=", (num1-num2))
+     repeat = input("Чи потрібен ще калькулятор? (так або ні): ")
+     if repeat.lower() == "так":
+         calculator()
 
-elif choice == '3':
-    print(num1, "*", num2, "=", (num1*num2))
-
-elif choice == '4':
-    print(num1, "/", num2, "=", (num1/num2))
-
-else:
-    print("Incorrect choice of operation")
+ calculator()
