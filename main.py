@@ -31,4 +31,4 @@ def calculator():
      if repeat.lower() == "так":
          calculator()
 
- calculator()
+calculator()
